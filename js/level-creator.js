@@ -31,7 +31,7 @@ function createElement(lvlElement) {
 	$(".draggable").draggable({
         stop:function(e){
             
-    			/*if ((event.clientX / screen.width) * 100 > 79) {
+    			if ((event.clientX / screen.width) * 100 > 79) {
         			console.log("true");
         			var value = $(this).val()
         			index = elementsOnScreen.indexOf(value);
@@ -40,7 +40,7 @@ function createElement(lvlElement) {
         			$(this).remove();
     			}else {
     				console.log("false");
-    			}*/
+    			}
 
     			console.log((event.clientX / screen.width) * 100 + "%");
 		
@@ -57,18 +57,19 @@ function createElement(lvlElement) {
 
 function save() {
 	for(var i = 0; i < numElements; i++) {
-		var blockElement = $("img[value=" + i + "]"),
-			position = blockElement.position();
-
-		blocks[i] = new Object();
-
-		blocks[i].id = i;
-		blocks[i].type = blockElement.attr("blockType");
-		blocks[i].x = position.left;
-		blocks[i].y = position.top;
-
-		levelExport += blocks[i].id + ":" + blocks[i].type + ":" + blocks[i].x + ":" + blocks[i].y + ";";
-
+		if($("img[value=" + i + "]").length){
+			var blockElement = $("img[value=" + i + "]"),
+				position = blockElement.position();
+	
+			blocks[i] = new Object();
+	
+			blocks[i].id = i;
+			blocks[i].type = blockElement.attr("blockType");
+			blocks[i].x = position.left;
+			blocks[i].y = position.top;
+	
+			levelExport += blocks[i].id + ":" + blocks[i].type + ":" + blocks[i].x + ":" + blocks[i].y + ";";
+		}
 
 
 
